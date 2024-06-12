@@ -1,0 +1,6 @@
+*.md
+*.yml
+LICENSE
+.github/
+docs/
+public/
