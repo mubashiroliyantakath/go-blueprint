@@ -6,12 +6,14 @@ COPY . .
 
 RUN env CGO_ENABLED=0 GOOS=linux go build -o go-blueprint
 
-FROM alpine
+FROM golang:1.22.4-alpine
+
+RUN apk add --no-cache git
 
 WORKDIR /
 
-COPY --from=builder /app/go-blueprint /go-blueprint
+COPY --from=builder /app/go-blueprint /usr/local/bin/go-blueprint
 
-RUN chmod +x /go-blueprint
+RUN chmod +x /usr/local/bin/go-blueprint
 
-ENTRYPOINT ["./go-blueprint"]
+ENTRYPOINT ["go-blueprint"]
